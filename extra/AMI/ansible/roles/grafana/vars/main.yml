@@ -1,0 +1,24 @@
+---
+# vars file for grafana
+packages:
+  - apt-transport-https
+  - software-properties-common
+  - wget
+  - curl
+  - unzip
+  - net-tools
+  - python3-pip
+
+loki_latest_url: "https://github.com/grafana/loki/releases/download/v2.5.0/loki-linux-amd64.zip"
+prometheus_server_url: "https://github.com/prometheus/prometheus/releases/download/v2.36.2/prometheus-2.36.2.linux-amd64.tar.gz"
+## Addresses of Polygon Edge nodes - needed for Prometheus
+psdk_nodes:
+  - "10.230.1.48"
+  - "10.230.2.148"
+  - "10.230.3.67"
+  - "10.230.4.130"
+
+influxdb_database_name: telegraf
+influxdb_username: telegraf
+influxdb_password: Te1egra&h
+  

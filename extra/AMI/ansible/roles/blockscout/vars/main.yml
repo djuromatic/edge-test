@@ -1,0 +1,44 @@
+---
+packages:
+  - esl-erlang=1:24.*
+  - elixir=1.13.*
+  - automake 
+  - libtool 
+  - inotify-tools 
+  - gcc 
+  - libgmp-dev
+  - libgmp10
+  - make 
+  - g++ 
+  - postgresql-client
+  - nodejs
+  - cargo
+
+env_vars:
+  ETHEREUM_JSONRPC_HTTP_URL: https://rpc.testnet.rario.com
+  ETHEREUM_JSONRPC_TRACE_URL: https://rpc.testnet.rario.com
+  ETHEREUM_JSONRPC_WS_URL: wss://rpc.testnet.rario.com/ws
+  DATABASE_URL: postgresql://blockscout:amzuB6xNyiFsbEM@terraform-20220714112731903800000001.cyyigbw3nbj2.us-west-2.rds.amazonaws.com:5432/blockscout
+  SECRET_KEY_BASE: LI/i2DqKx/ZQTGZeGUdi6dOjrDNsNDeqXjzc6sddNYrFLlIGERsK2TlTqCrsUf3p
+  CHAIN_ID: 91001
+  HEART_COMMAND: "/usr/bin/systemctl restart explorer.service"
+  SUBNETWORK: PolygonEdge POA
+  LOGO: /images/polygon_edge_logo.svg
+  LOGO_FOOTER: /images/polygon_edge_logo.svg
+  COIN: EDGE
+  COIN_NAME: Polygon Edge
+blockscout_dir_path: /usr/local/blockscout
+
+
+# export ETHEREUM_JSONRPC_HTTP_URL=https://rpc.testnet.rario.com
+# export ETHEREUM_JSONRPC_TRACE_URL=https://rpc.testnet.rario.com
+# export ETHEREUM_JSONRPC_WS_URL=wss://rpc.testnet.rario.com/ws
+# export DATABASE_URL=postgresql://blockscout:amzuB6xNyiFsbEM@terraform-20220714100519078400000001.cyyigbw3nbj2.us-west-2.rds.amazonaws.com:5432/blockscout
+# export SECRET_KEY_BASE=LI/i2DqKx/ZQTGZeGUdi6dOjrDNsNDeqXjzc6sddNYrFLlIGERsK2TlTqCrsUf3p
+# export CHAIN_ID=91002
+# export HEART_COMMAND="/usr/bin/systemctl restart explorer.service"
+# export SUBNETWORK=PolygonEdge POA
+# export LOGO=/images/polygon_edge_logo.svg
+# export LOGO_FOOTER=/images/polygon_edge_logo.svg
+# export COIN=EDGE
+# export COIN_NAME=Polygon Edge

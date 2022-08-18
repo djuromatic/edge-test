@@ -1,0 +1,86 @@
+---
+-
+  name: "Setup Grafana metrics on nodes"
+  hosts: nodes
+  become: yes
+  vars:
+    promtail_latest_url: "https://github.com/grafana/loki/releases/download/v2.5.0/promtail-linux-amd64.zip"
+    ## Grafana IP address that hosts Loki service
+    loki_ip: 10.230.3.250
+    loki_port: 3100
+    log_files_location: /home/ubuntu/polygon/logs/edge-server.log
+    ## Grafana IP address that hosts the InfluxDB for Telegraph data
+    influxdb_ip_address: 10.230.3.250
+    influxdb_database_name: telegraf
+    influxdb_username: telegraf
+    influxdb_password: Te1egra&h
+
+  tasks:
+    - name: "Install software"
+      apt:
+        pkg:
+          - unzip
+          - net-tools
+          - python3-pip
+
+    - name: "Get Promtail Logs Exporter"
+      unarchive:
+        remote_src: yes
+        src: "{{promtail_latest_url}}"
+        dest: /usr/local/bin
+
+    - name: Rename binary
+      command: "mv /usr/local/bin/promtail-linux-amd64 /usr/local/bin/promtail"
+
+    - name: Set executable on Promtail binary
+      file:
+        mode: "755"
+        path: /usr/local/bin/promtail
+
+    - name: Create Promtail YAML config file
+      template:
+        src: templates/promtail_conf.j2
+        dest: /usr/local/bin/promtail_conf.yml
+
+    - name: Create Loki Service
+      template:
+        src: templates/promtail_service.j2
+        dest: /etc/systemd/system/promtail.service
+
+    - name: Enable & Start Promtail Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: started
+        name: "promtail.service"
+
+    - name: Add Telefraf Repo Key
+      shell:
+        cmd: 'curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -'
+        executable: /bin/bash
+        warn: no
+
+    - name: Add Telegraf Repo
+      shell:
+        cmd: 'source /etc/lsb-release && echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | tee /etc/apt/sources.list.d/influxdb.list'
+        executable: /bin/bash
+        warn: no
+
+    - name: Install Telegraf
+      apt:
+        update_cache: yes
+        name: telegraf
+        state: present
+
+    - name: Create Telegraf Config File
+      template:
+        src: templates/telegraf_conf.j2
+        dest: /etc/telegraf/telegraf.conf
+        backup: yes
+
+    - name: Enable & Start Telegraf Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: started
+        name: telegraf

@@ -1,0 +1,12 @@
+[Unit] 
+Description=Promtail service 
+After=network.target 
+ 
+[Service] 
+Type=simple 
+ExecStart=/bin/sh -c '/usr/local/bin/promtail -config.file /usr/local/bin/promtail_conf.yml --client.external-labels=hostname=$(hostname)'
+Restart=always
+RestartSec=5
+ 
+[Install] 
+WantedBy=multi-user.target

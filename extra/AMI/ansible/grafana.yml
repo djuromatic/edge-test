@@ -1,0 +1,8 @@
+---
+##### Ansible playbook which is run by Packer only
+- 
+  name: Configure Grafana via Packer
+  hosts: all
+  become: true
+  roles:
+    - grafana

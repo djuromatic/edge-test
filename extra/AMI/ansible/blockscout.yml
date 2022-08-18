@@ -1,0 +1,9 @@
+---
+  -
+    name: Deploy Blockscout
+    hosts: all
+    roles:
+      -
+        role: blockscout
+        become: yes
+    environment: "{{env_vars}}"

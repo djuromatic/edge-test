@@ -1,0 +1,18 @@
+[Unit]
+Description=Blockscout Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory={{blockscout_dir_path}}
+ExecStart=/usr/bin/mix phx.server
+EnvironmentFile={{blockscout_dir_path}}/env_vars.env
+
+[Install]
+WantedBy=multi-user.target

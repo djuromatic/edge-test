@@ -1,0 +1,13 @@
+ssh_key_name = "djuro-dev"
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDxel+igJBBz7ATgrtzr/uypFawZeiMLCcS9PJzwTKoCfi4tnTJBeRpNbuWe58X7cohNnllndwU/posoT499d9+h+zOJysCa+KxYLkqTswQJ05wzUJpB0+2F6RS8JLhTT2IkgpXp0agTEwUjJxJu1gSPN6NeAwfSXNzT2zj8Ax2tunB4vnJynwwP/+53IQB+c3wnUg78wQXL0VHN/2zRPRAOZ2/kZwWInvz5oHSBdNJEJ5IFSL/3WwpRc0fwA1T8ZCkixBRPqd33BTxqb/6tc67kkXR5d30B6BtpMFHO2gPFa21r8GFrcKDA4s4ALXHmIoPwPgD6/FY17xV2XaF5vsyqbFEH+hjW5Ofu5HlslxKjKhA+mMGDwJTOOymkVRhUgtTYAcI92vmxpgs14Us/AKwgbZPfJFYOPCi8t8dtJm2AgO0mpLff0z5e0Ozq79BSU++Z83YFTeBVB2aLVkPyrrOHOQXw1f7bvwHckrRWL2V9FElr6wTMBhWl4joQU+Orhk= djuromatic@Djuros-MacBook-Pro.local"
+admin_ip= "46.17.149.183/32"                //declared locally in terraform.tfvars
+account_id= "983715762243"                 //declared locally in terraform.tfvars
+premine= "0x3635C9ADC5DEA00000"                    //declared locally in terraform.tf
+nodes_alb_certificate= "rpc.mainnet.rario.com"
+blockscout_alb_certificate= "explorer.mainnet.rario.com"
+grafana_alb_certificate= "grafana.mainnet.rario.com"
+
+database_master_pass= "W<g.']eRGK7`2*w,"     //declared locally in terraform.tf
+database_master_username= "blockscout"
+
+s3_bucket_name="rario-edge-bucket"

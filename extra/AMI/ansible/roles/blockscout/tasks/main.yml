@@ -1,0 +1,99 @@
+---
+-
+  name: Update and upgrade system
+  apt:
+    update_cache: yes
+    upgrade: yes
+- 
+  name: Change default target to multi-user
+  file:
+    src: /lib/systemd/system/multi-user.target
+    dest: /etc/systemd/system/default.target
+    state: link
+-
+  name: Install Erlang from apt repo
+  apt:
+    name: erlang
+    state: present
+-
+  name: Install Erlang Solutions deb package
+  apt:
+    deb: https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
+    update_cache: yes
+-
+  name: Add Erlang Solutions Key
+  apt_key:
+    url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+    state: present
+-
+  name: Add NodeJS repo
+  shell: sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - > /tmp/node.log
+  args:
+    creates: /tmp/node.log
+    warn: no
+-
+  name: Add Rust/Cargo repo
+  shell: sudo curl https://sh.rustup.rs -sSf | sh -s -- -y > /tmp/rust.log
+  args:
+    creates: /tmp/rust.log
+    warn: no
+-
+  name: "Install software dependancies"
+  apt:
+    name: "{{packages}}"
+    state: present
+-
+  name: Clone Blockscout repo
+  git:
+    repo: https://github.com/Trapesys/blockscout.git
+    single_branch: yes
+    dest: "{{blockscout_dir_path}}"
+- 
+  name: Create Blockscout env file
+  template:
+    src: blockscout_env.j2
+    dest: "{{blockscout_dir_path}}/env_vars.env"
+-
+  name: Compile blockscout and its dependancies
+  shell:
+    cmd: "{{item}}"
+    chdir: "{{blockscout_dir_path}}"
+  loop:
+    - mix local.hex --force
+    - mix do deps.get, local.rebar --force, deps.compile, compile
+-
+  name: Create and populate database
+  shell:
+    cmd: mix do ecto.drop, ecto.create, ecto.migrate
+    chdir: "{{blockscout_dir_path}}"
+-
+  name: Install npm dependancies and compile frontend
+  shell:
+    cmd: "{{item}}"
+    chdir: "{{blockscout_dir_path}}/apps/block_scout_web/assets"
+  loop:
+    - sudo npm install
+    - sudo node_modules/webpack/bin/webpack.js --mode production
+-
+  name: Build static assets
+  shell:
+    cmd: mix phx.digest
+    chdir: "{{blockscout_dir_path}}"
+-
+  name: Generate self-signed cert
+  shell:
+    cmd: mix phx.gen.cert blockscout blockscout.local
+    chdir: "{{blockscout_dir_path}}/apps/block_scout_web"
+- 
+  name: Create Blockscout service
+  template:
+    src: blockscout_service.j2
+    dest: /etc/systemd/system/explorer.service
+-
+  name: Enable Blockscout service
+  systemd:
+    name: explorer.service
+    state: started
+    daemon_reload: yes
+    masked: no
+    enabled: yes

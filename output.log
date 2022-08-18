@@ -1,0 +1,47 @@
+bastion_instance_public_ip = "54.245.223.208"
+blockscout_alb_dns = "blockscout-alb-testnet-1821177033.us-west-2.elb.amazonaws.com"
+database_endpoint = "terraform-20220714100519078400000001.cyyigbw3nbj2.us-west-2.rds.amazonaws.com:5432"
+grafana_alb_dns = "grafana-alb-testnet-665868162.us-west-2.elb.amazonaws.com"
+internal_sec_group = "sg-06aa18707013ecc32"
+jsonrpc_dns_name = "polygon-edge-jsonrpc-testnet-1460825881.us-west-2.elb.amazonaws.com"
+nodes_private_ip = [
+  "10.230.1.48",
+  "10.230.2.148",
+  "10.230.3.67",
+  "10.230.4.130",
+]
+private_subnet_id = "subnet-0f7becc655c5ce10a"
+
+
+0xF00000
+
+ETHEREUM_JSONRPC_HTTP_URL="https://rpc.testnet.nexon.io"
+ETHEREUM_JSONRPC_TRACE_URL="https://rpc.testnet.nexon.io"
+DATABASE_URL='postgresql://blockscout:amzuB6xNyiFsbEM@terraform-20220714100519078400000001.cyyigbw3nbj2.us-west-2.rds.amazonaws.com:5432/blockscout'
+SECRET_KEY_BASE=PJdwAXLgUfuDxglDKb0BfM8hjaIuivKo06vgwH12o2lzoD4zBq8T/mnKtADeBsCR
+ETHEREUM_JSONRPC_WS_URL="wss://rpc.testnet.nexon.io/ws"
+CHAIN_ID=91002
+HEART_COMMAND="/usr/bin/systemctl restart explorer.service"
+SUBNETWORK="PolygonEdge POA"
+LOGO=/images/polygon_edge_logo.svg
+LOGO_FOOTER=/images/polygon_edge_logo.svg
+#PATH=$PATH:/lib/elixir/bin
+
+
+0x228466F2C715CbEC05dEAbfAc040ce3619d7CF0B
+
+0xA39Fed214820cF843E2Bcd6cA1759257a530894B
+
+
+bastion_instance_public_ip = "54.245.223.208"
+database_endpoint = "terraform-20220714100519078400000001.cyyigbw3nbj2.us-west-2.rds.amazonaws.com:5432"
+grafana_alb_dns = "grafana-alb-testnet-665868162.us-west-2.elb.amazonaws.com"
+internal_sec_group = "sg-06aa18707013ecc32"
+jsonrpc_dns_name = "polygon-edge-jsonrpc-testnet-1460825881.us-west-2.elb.amazonaws.com"
+nodes_private_ip = [
+  "10.230.1.48",
+  "10.230.2.148",
+  "10.230.3.67",
+  "10.230.4.130",
+]
+private_subnet_id = "subnet-0f7becc655c5ce10a"
